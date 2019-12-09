@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="static/h.js"></script>
+</head>
+<body>
+
+
+<table border="1" id="result">
+<!--    {{ name }}-->
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+
+    {% for user  in users %}
+    <tr>
+        <td id='{{ user["id"] }}i'>
+            {{ user["id"] }}
+        </td>
+        <td id='{{ user["id"] }}n'>
+            {{ user["name"] }}
+        </td>
+        <td id='{{ user["id"] }}e'>
+            {{ user["email"] }}
+        </td>
+        <td id='{{ user["id"] }}p'>
+            {{ user["password"] }}
+        </td>
+        <td id='{{ user["id"] }}s'>
+            {{ user["status"] }}
+        </td>
+        <td id='{{ user["id"] }}d'>
+            <button onclick='forDelete({{ user["id"] }})'>forDelete</button>
+        </td>
+
+        <td id='{{ user["id"] }}u'>
+            <button onclick='forUpdate({{ user["id"] }})'>forUpdate</button>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<br>
+<form id="myform" method="post" action="/adminpanle" style="text-align:center;">
+    <a onclick="document.getElementById('myform').submit();"  style="text-align:center;">Adminpanle</a>
+</form>
+
+<form id="dele" name="del" method="post" action="/delete">
+    <input type="hidden" name="id">
+</form>
+
+<form id="upda" name="upd" method="post" action="/update">
+    <input type="hidden" name="id">
+    <input type="hidden" name="name">
+    <input type="hidden" name="password">
+</form>
+
+</body>
+</html>
