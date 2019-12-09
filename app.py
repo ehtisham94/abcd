@@ -94,7 +94,7 @@ def update_user():
 @myApp.route('/')
 def index():
 
-    return render_template('index.html')
+    return render_template('login.html', ty="ACCOUNT", ac="login")
     # return render_template('index.html')
 
 @myApp.route('/login', methods=["POST", "GET"])
@@ -167,6 +167,6 @@ def mySignup():
 
 # if __name__ == "__main__":
 # myApp.run(debug=True)
-myApp.run()
+# myApp.run()
 
 
