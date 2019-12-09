@@ -101,7 +101,7 @@ def index():
 def login():
 
     if request.method == "POST":
-        # print ("user"+request.path)
+        #For admin email = 'admin' and password = 'secret'
         u = User.query.filter_by(email = request.form['username']).first()
         if u :
             if u.email == request.form['username'] and u.password == request.form['pass']:
