@@ -38,26 +38,28 @@ class User(db.Model):
 
 # db.create_all()
 
-@myApp.route('/signup', methods=["POST", "GET"])
+@myApp.route('/signup', methods=["POST"])
 def signup():
-    if request.method == "POST":
-        if User.query.filter_by(email = request.form['email']).first() :
-            return render_template('signup.html',msgs=["Email already exist"])
-        else:
-            user1 = User()
-            user1.name = request.form['name']
-            user1.email = request.form['email']
-            user1.status = request.form['status']
-            user1.password = random.randint(1000, 9999)
-            db.session.add(user1)
-            db.session.commit()
-            return render_template('signup.html', msgs=[" Successfull ", "Email : "+ user1.email, "Password : "+ user1.password] )
+    if User.query.filter_by(email = request.form['email']).first() :
+        return render_template('signup.html',msgs=["Email already exist"])
     else:
-        return render_template('signup.html')
+        user1 = User()
+        user1.name = request.form['name']
+        user1.email = request.form['email']
+        user1.status = request.form['status']
+        user1.password = random.randint(1000, 9999)
+        db.session.add(user1)
+        db.session.commit()
+        return render_template('signup.html', msgs=[" Successfull ", "Email : "+ user1.email, "Password : "+ user1.password] )
 
-@myApp.route('/users')
+
+@myApp.route('/signupform', methods=["POST"])
+def signupform():
+    return render_template('signup.html')
+
+@myApp.route('/users', methods=["POST"])
 def users():
-    myUsers = User.query.all()
+    myUsers = User.query.filter(User.status != "A")
     return render_template('users.html', users=myUsers)
 
 @myApp.route('/delete', methods=["POST"])
@@ -120,8 +122,6 @@ def login():
         # return render_template('login.html', ty="USER", ac="login")
 
 
-    #return "<h1>Hello login!</h1><h1>Hello login!</h1><h1>Hello login!</h1>"
-
 
 @myApp.route('/admin', methods=["POST", "GET"])
 def admin():
@@ -144,23 +144,6 @@ def admin():
 @myApp.route('/adminpanle', methods=["POST"])
 def adminpanle():
     return render_template('adminpanle.html')
-
-
-@myApp.route('/test1', methods=["POST", "GET"])
-def mySignup():
-    # print(request.form['username'])
-
-    if request.method == "POST":
-        user1 = User()
-        user1.name = request.form['username']
-        user1.password = request.form['pass']
-        user1.city = request.form['city']
-
-        db.session.add(user1)
-        db.session.commit()
-
-    return render_template('signup.html')
-
 
 
 # print(__name__)

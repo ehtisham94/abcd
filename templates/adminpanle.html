@@ -10,10 +10,14 @@
 <body>
 <h1>Welcome Admin</h1>
 <br>
-<a href="/signup">Create new users</a>
+<a onclick="document.getElementById('myform1').submit();"  >Create new users</a>
 <br>
-<a href="/users">View all users</a>
+<a onclick="document.getElementById('myform2').submit();"  >View all users</a>
 <br>
 <a href="/">Home</a>
+<form id="myform1" method="post" action="/signupform" >
+</form>
+<form id="myform2" method="post" action="/users" >
+</form>
 </body>
 </html>
